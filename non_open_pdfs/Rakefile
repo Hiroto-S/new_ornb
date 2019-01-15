@@ -1,0 +1,7 @@
+desc 'non_open_pdfs'
+task :non_open_pdfs do
+  system 'ruby non_open_pdfs.rb'
+  system 'emacs readme_cl.csv'
+  system 'ruby non_open_pdfs.rb'
+  system 'emacs README_after_change.org'
+end

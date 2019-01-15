@@ -1,0 +1,352 @@
+''#+OPTIONS: ^:{}
+
+#+STARTUP: indent nolineimages
+
+#+TITLE: 2018年度大学院講義ruby
+
+#+AUTHOR: 西谷滋人
+
+#+EMAIL:     (concat "nishitani@kwansei.ac.jp")
+
+#+LANGUAGE:  jp
+
+#+OPTIONS:   H:4 toc:t num:2
+
+
+
+#+SETUPFILE: /Users/bob/org-html-themes/setup/theme-readtheorg.setup
+
+
+
+#+github: TeamNishitani/grad_lecture_2018
+
+#+short: Lectures on graduated course of Kwansei Gakuin, 2018
+
+
+
+- [[https://github.com/TeamNishitani/grad_lecture_2018]]
+
+- https://github.com/orgs/TeamNishitani/teams/teamnishitanigrad2018/members
+
+- [[./lib/names.org]]
+
+* はじめに
+
+** 2018年の天変地異
+
+今年は受講生が激増しました{y16:10, y17:9, y18:34}．
+
+多分
+
+: 浅野さんの退職で，行き場をなくしたのが大挙して来たんだろうな．
+
+と予想していたのですが，
+
+それだけでなく，
+
+台風による集中講義の中止も効いているようです．
+
+
+
+** 講義内容の選択
+
+- 去年のをやっていく
+
+- [[https://ist.ksc.kwansei.ac.jp/~nishitani/?RubyPrimary][前の]] を掘り起こして，orgる
+
+- 研究室学生の士気を考えると全く同じのはいややろな．．．
+
+- 確認試験へ直行するのが良さそう．
+
+- そうすると昔のをorgルカ．．
+
+
+
+という考察に基づいて，むかーーーしのrubyネタですることにしました．
+
+それだけでは，私が面白くないので，Pragmatic programmerと抱き合わせています．
+
+
+
+* achievement
+
+#+include: "./lib/table.org"
+
+* 初級
+
+** (9/26) イントロ
+
+- ネタ
+
+  - githubを教えます
+
+  - oss gateの紹介
+
+  - pull request, rubocop
+
+- 宿題
+
+  - ruby 環境の構築
+
+  - github accountの作成
+
+  - ssh login
+
+** (10/3) github
+
+- ネタ
+
+  - github education
+
+  - 共有
+
+- [[/Users/bob/Desktop/ampm_presentations/fukumori_sympo.key][git pull requestの動作]]
+
+  - [[file:./figs/fukumori_sympo.008.jpeg]]
+
+  - [[file:./figs/fukumori_sympo.009.jpeg]]
+
+#+begin_example
+
+  - git clone [[git.repository.address]]
+
+  - git add -A
+
+  - git commit -m 'first commit'
+
+  - git push origin master
+
+#+end_example
+
+  - on a net browser, "pull request"
+
+** (10/10) emacs, ruby_fun(1,2,3)
+
+- ネタ
+
+  - [[./docs/pragmatic_programmer/c2_2_orthogonality.pdf][直交性]]を守れば．．．
+
+  - ruby
+
+  - [[https://www.ruby-lang.org/ja/documentation/ruby-from-other-languages/][他言語からのRuby入門]]
+
+    - irb, pry, ipython
+
+  - off line manual, ri(eng), refe,  [[http://miyamae.github.io/rubydoc-ja/][rubydoc-ja(mac, 日本語)]]
+
+- pragmatic programmer(達人プログラマーより)
+
+  - [[./docs/pragmatic_programmer/c3_14_plain_text.pdf]]
+
+  - [[./docs/pragmatic_programmer/c3_15_shell.pdf]]
+
+  - [[./docs/pragmatic_programmer/c3_16_editor.pdf]]
+
+  - [[./docs/pragmatic_programmer/c3_17_backup.pdf]]
+
+- 宿題
+
+  - [[./docs/ruby_fun/1st_day.org]]
+
+  - [[./docs/ruby_fun/2nd_day.org]]
+
+  - [[./docs/ruby_fun/3rd_day.org]]
+
+  - push, pull request
+
+** (10/17) ruby_fun(4,5) <method>, Google recruit,
+
+- ネタ
+
+  - editor
+
+  - [[./docs/design_pattern/RussOlsen_EloquentRuby_c10_class.pdf]]
+
+- 宿題
+
+  - ruby_fun(4,5)
+
+    - [[./docs/ruby_fun/4th_day.org]]
+
+    - [[./docs/ruby_fun/5th_day.org]]
+
+  - Google recruit,
+
+    - [[./docs/ruby_fun/google_recruit/google_recruit.org]]
+
+  - gnuplot install 来週これがあるといいので．．．
+
+* (10/24) Travelling Salesman <class>, gnuplot
+
+- ネタ
+
+  - git log -p ./commit
+
+  - [[./docs/ruby_novice_2018s/1st_hello_method.org]]
+
+  - [[./docs/fukumori_sympo.key]]
+
+  - [[./docs/pragmatic_programmer/c5_29_view.pdf ]](分割統治, publish and subsも...)
+
+  - [[./docs/design_pattern/RussOlsen_c2_2_Class.pdf]]
+
+* (10/31) gnuplot, ssh_mini
+
+- ネタ
+
+  - [[./docs/ruby_novice_2018s/2nd_hello_class.org]]
+
+  - [[./lib/add_user/README.org][どうしても環境構築がダメな場合は，miniをsshで使ってもらおう]]
+
+    - cascade, splitやめた．
+
+    - my_helpの紹介やめた．
+
+- 宿題
+
+  - gnuplot
+
+  - numo-gnuplot
+
+  - traveling_salesman
+
+    - [[./docs/ruby_fun/traveling_salesman/README.org]]
+
+    - こいつは難しすぎるよう．もっと後で，単位認定に使うか．答え隠して．
+
+    - refactoringとTDDを組み合わせた，codingの実践
+
+      - gnuplotとclassの基本を組み込む
+
+      - 次何を作るかをtestにして，
+
+      - coding, refactoring, 視覚化
+
+      - 継承，
+
+    - もう少し，役立つお題がいい？？
+
+    - なら，ここでやるのは，gnuplotでお絵描きだけだな．
+
+    - やった！！！Mandelbrot復活や．
+
+* (11/7) testing framework
+
+- ネタ
+
+  - [[./docs/emacs/README.org]]
+
+  - [[./docs/testing_frameworks/3rd_leap_year_test.org]]
+
+    - [[./docs/testing_frameworks/RussOlsen_Eloquent/RussOlsen_Eloquent_c9.pdf]]
+
+    - [[./docs/testing_frameworks/RussOlsen_Eloquent/README.org][RussOlsenのspecの補足説明]]
+
+- 宿題
+
+  - 1st_dayから5th_dayの中から好きな問題を一つ選んで，rspecを書け
+
+  - ただし，次の雛形に従って書くべし．
+
+    - 1st to 4th days
+
+      1. 1st_day/hello_world.rbをtest
+
+      1. 1st_dayと同じlevelに'spec' directoryを作る
+
+      1.  [[./docs/testing_frameworks/spec/1st_day_hello_world_spec.rb]]
+
+      1. methodのないmainだけのtestには難点があって，'spec' directoryの中でrspecを起動する必要あり．
+
+    - 5th day
+
+* (11/14,21) refactoring
+
+- ネタ
+
+  - [[./docs/refactoring/4th_tsutaya_refactor.org]]
+
+  - [[./docs/refactoring/HeadFirst_SoftwareDevelop_Appenndix1.pdf]]
+
+  - [[./docs/refactoring/RefactoringRuby_CodeSmell.pdf]]
+
+- 宿題
+
+  - Martin FowlerのRefactoring rubyの2章を写経しなさい．
+
+  - full_codes/ をrecursive copyしてrefactoringしていけ
+
+    - rspec specでチェックしてくれる
+
+    - [[./docs/refactoring/Refactoring2-1.pdf]]
+
+    - [[./docs/refactoring/Refactoring2-2.pdf]]
+
+    - [[./docs/refactoring/Refactoring2-3.pdf]]
+
+* (11/28, 12/12,19) pattern, template, observer, DSL, CoC...
+
+*** Design patternについて
+
+- [[./docs/design_pattern/Matsu/DesignPatternMatsu-Cover-4.pdf]]
+
+- [[./docs/design_pattern/DesignPatternGangOfFour.pdf]]
+
+*** Russ Olsen流Ruby言語入門
+
+- [[./docs/design_pattern/RussOlsen_c2_1_Ruby.pdf]]
+
+- [[./docs/design_pattern/RussOlsen_c2_2_Class.pdf]]
+
+- [[./docs/design_pattern/RussOlsen_EloquentRuby_c10_class.pdf]]
+
+*** Patternいくつか
+
+- [[./docs/design_pattern/RussOlsen_c3_template.pdf]]
+
+- [[./docs/design_pattern/RussOlsen_c4_strategy.pdf]]
+
+- [[./docs/design_pattern/RussOlsen_c5_observer.pdf]]
+
+- [[./docs/design_pattern/RussOlsen_c6_Composite.pdf]]
+
+- [[./docs/design_pattern/RussOlsen_c16_DSL.pdf]]
+
+- [[./docs/design_pattern/RussOlsen_c18_CoC.pdf]]
+
+- [[./docs/design_pattern/RussOlsen_DesignPatternsInRuby_whole.pdf]]
+
+* その他講義ネタ
+
+** ./docs/pragmatic_programmer/
+
+- [[./docs/pragmatic_programmer/c0_WardCunningham.pdf]]
+
+- [[./docs/pragmatic_programmer/c1_overview.pdf]]
+
+- [[./docs/pragmatic_programmer/c2_1_DRY.pdf]]
+
+
+
+** ./docs/emacs
+
+- [[./docs/emacs/emacs_key_bind3.pdf]]
+
+- [[./docs/emacs/FolderConfig.pdf]]
+
+- [[./docs/emacs/emacs_key_bind3.key]]
+
+** ./docs/happy_ruby
+
+- [[./docs/happy_ruby/TanoshiiRuby_v5_c1.pdf]]
+
+- [[./docs/happy_ruby/c2.ipynb]]
+
+- [[./docs/happy_ruby/TanoshiiRuby_v5_c2-3.pdf]]
+
+- [[./docs/happy_ruby/RussOlsen_EloquentRuby_c5.pdf]]
+
+- [[./docs/happy_ruby/c3_4.ipynb]]
+
+- [[./docs/happy_ruby/RussOlsen_EloquentRuby_c1.pdf]]
+
