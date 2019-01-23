@@ -1,7 +1,10 @@
 desc 'non_open_pdfs'
 task :non_open_pdfs do
+  system 'ruby scrape.rb'
+  system 'emacs new_readme_cl.csv'
+  system 'ruby compare.rb'
   system 'ruby non_open_pdfs.rb'
-  system 'emacs readme_cl.csv'
-  system 'ruby non_open_pdfs.rb'
-  system 'emacs README_after_change.org'
+  system 'ruby make_html.rb README_after_change.org'
+  system 'emacs ../README_after_change.org --batch -f org-html-export-to-html --kill'
+  system 'open ../README_after_change.html'
 end

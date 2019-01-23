@@ -1,0 +1,16 @@
+#+TITLE:     Example of Tasks
+#+AUTHOR:    Your name
+#+EMAIL:     (concat "email")
+#+DATE:      2018-12-9
+#+LANGUAGE:  jp
+#+OPTIONS:   H:4 num:nil toc:2
+
+#+SETUPFILE: /Users/hiroto/org-html-themes/setup/theme-readtheorg.setup
+
+#+begin_html
+<div class="right">
+  <a href="https://github.com/fniessen/org-html-themes/blob/master/demo/example.org" class="fa fa-github"> Edit on GitHub</a>
+</div>
+ #+end_html
+
+-----

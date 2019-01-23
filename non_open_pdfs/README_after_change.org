@@ -1,3 +1,37 @@
+#+TITLE:     Example of Tasks
+
+#+AUTHOR:    Your name
+
+#+EMAIL:     (concat "email")
+
+#+DATE:      2018-12-9
+
+#+LANGUAGE:  jp
+
+#+OPTIONS:   H:4 num:nil toc:2
+
+
+
+#+SETUPFILE: /Users/hiroto/org-html-themes/setup/theme-readtheorg.setup
+
+
+
+#+begin_html
+
+<div class="right">
+
+  <a href="https://github.com/fniessen/org-html-themes/blob/master/demo/example.org" class="fa fa-github"> Edit on GitHub</a>
+
+</div>
+
+ #+end_html
+
+
+
+-----
+
+
+
 ''#+OPTIONS: ^:{}
 
 #+STARTUP: indent nolineimages
@@ -11,10 +45,6 @@
 #+LANGUAGE:  jp
 
 #+OPTIONS:   H:4 toc:t num:2
-
-
-
-#+SETUPFILE: /Users/bob/org-html-themes/setup/theme-readtheorg.setup
 
 
 
@@ -344,9 +374,9 @@
 
 - [[./docs/happy_ruby/TanoshiiRuby_v5_c2-3.pdf]]
 
-- [[./docs/happy_ruby/RussOlsen_EloquentRuby_c5.pdf]]
-
+- [[./docs/happy_ruby/RussOlsen_EloquentRuby_c5.pdf][ "bbbbbb"]]
 - [[./docs/happy_ruby/c3_4.ipynb]]
 
-- [[./docs/happy_ruby/RussOlsen_EloquentRuby_c1.pdf]]
+- [[./docs/happy_ruby/RussOlsen_EloquentRuby_c1.pdf][ "aaaaaa"]]
+
 

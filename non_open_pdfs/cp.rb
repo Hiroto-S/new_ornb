@@ -3,11 +3,30 @@ require "open3"
 require "csv"
 
 org_name = "README_test.org"
-latest_csv_name = "latest_readme_cl.csv"
+csv_name = "readme_cl.csv"
 new_org_name = "README_after_change.org"
-csv_data = CSV.read("#{latest_csv_name}",headers: false)
+#orgリンクを抽出
+m = []
+File.open("#{org_name}","r") do |file|
+ file.each do |line|
+   if path = line.match(/\[\[(.+)pdf/)
+     CSV.open("#{csv_name}","a") do |csv|
+       csv << [path,"false"]
+      end
+    end
+  end
+end
+
+CSV.open("#{csv_name}","a") do |csv|
+  csv << ['-----------']
+ end
+
+
+#csvデータの読み込みと新しいファイルの作成
+csv_data = CSV.read("#{csv_name}",headers: false)
 new_org = File.open("#{new_org_name}","w")
 
+#csvデータを配列に代入
 str = []
 b = []
 i = 0
@@ -18,7 +37,7 @@ csv_data.each do |csv|
   i = i+1
 end
 
-
+#csvデータの変更点を新しいorgに反映
 n = 0
 cnt = 0
 File.open("#{org_name}","r") do |file|
@@ -40,6 +59,4 @@ File.open("#{org_name}","r") do |file|
       cnt = 0
     end
   end
-end
-CSV.open("#{latest_csv_name}","w") do |csv|
 end
