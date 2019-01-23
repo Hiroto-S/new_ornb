@@ -28,14 +28,15 @@ File.open("#{org_name}","r") do |file|
         unless str[n].match(/false/)
           source = line.gsub(/\-|\]|\n|" "/, "")
           line = b[n]
-          new_org.print "-#{source}][#{line}]\n"
+          #          new_org.print "-#{source}][#{line}]\n"
+                    new_org.print "-#{source}][#{line}]\n"
           cnt = 1
         end
         n = n+1
       end
     end
     if cnt == 0
-      new_org.print "#{line}\n"
+      new_org.print "#{line}"
     else
       cnt = 0
     end
