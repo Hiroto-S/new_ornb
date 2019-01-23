@@ -1,37 +1,68 @@
 require "open3"
 require "csv"
+require 'colorize'
 
+class NewCSV
+  attr_reader :org, :csv, :tmp_csv
+  def initialize(*argv)
+    @org = ARGV[0] || "README_test.org"
+    #new_org = "README_after_change.org"
+    @csv = "readme_cl.csv"
+    @tmp_csv = "tmp_readme_cl.csv"
 
-csv_name = "readme_cl.csv"
-new_csv_name = "new_readme_cl.csv"
-org_name = "README_test.org"
-new_org_name = "README_after_change.org"
+    conts = mk_conts(@org)
+    target_csv = select_csv(@csv)
+    write_csv(target_csv, conts)
+  end
 
-old = CSV.read("#{csv_name}",headers: false)
-path = []
-if old.empty? == true
-  File.open("#{org_name}","r") do |file|
-   file.each do |line|
-    if path = line.match(/\[\[(.+)pdf\][.?|\[(.+)\]]\]/)
-      CSV.open("#{csv_name}","a") do |csv|
-        csv << [path,"false"]
-      end
-      CSV.open("#{new_csv_name}","a") do |csv|
-        csv << [path,"false"]
-      end
-    end
-   end
- end
-else
-  File.open("#{org_name}","r") do |file|
-   file.each do |line|
-    if path = line.match(/\[\[(.+)pdf/)
-      CSV.open("#{new_csv_name}","a") do |csv|
-        csv << [path,"false"]
+  def mk_conts(org)
+    conts = []
+    File.open(org,"r") do |file|
+      file.each do |line|
+        if path = line.match(/\[\[(.+).pdf(.*)\]\]/)
+          conts << [path[1]+'.pdf',false]
+        end
       end
     end
-   end
+    conts
+  end
+
+  def select_csv(csv)
+    unless File.exist?(csv)
+      return csv
+    else
+      return @tmp_csv
+    end
+  end
+
+  def write_csv(csv, conts)
+    CSV.open(csv,'w') do |csv|
+      conts.each do |cont|
+        csv << cont
+      end
+    end
   end
 end
 
-new = CSV.read("#{new_csv_name}",headers: false)
+list_csv = NewCSV.new
+
+out, err, status= Open3.capture3("diff #{list_csv.tmp_csv} #{list_csv.csv}")
+if out == ''
+  puts "no revision on csv list".green
+  exit
+end
+revised_array = []
+revised = false
+out.split("\n").each do |line|
+  revised = true if line.chomp =='---'
+  if revised
+    p line
+    revised_array << line[2..-1].split(',')
+  end
+end
+revised_array[1..-1].each do |cont|
+  p cont
+end
+# compare
+# write_non_open_pdfs
+ 
