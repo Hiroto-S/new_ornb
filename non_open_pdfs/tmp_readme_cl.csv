@@ -1,6 +1,6 @@
-./docs/pragmatic_programmer/c2_2_orthogonality.pdf,book
-./docs/pragmatic_programmer/c3_14_plain_text.pdf,journal
-./docs/pragmatic_programmer/c3_15_shell.pdf,web_hoho
+./docs/pragmatic_programmer/c2_2_orthogonality.pdf,false
+./docs/pragmatic_programmer/c3_14_plain_text.pdf,false
+./docs/pragmatic_programmer/c3_15_shell.pdf,false
 ./docs/pragmatic_programmer/c3_16_editor.pdf,false
 ./docs/pragmatic_programmer/c3_17_backup.pdf,false
 ./docs/design_pattern/RussOlsen_EloquentRuby_c10_class.pdf,false
