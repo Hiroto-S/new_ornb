@@ -45,6 +45,7 @@ class NewCSV
 end
 
 list_csv = NewCSV.new
+#p revised_array
 
 out, err, status= Open3.capture3("diff #{list_csv.tmp_csv} #{list_csv.csv}")
 if out == ''
@@ -60,9 +61,21 @@ out.split("\n").each do |line|
     revised_array << line[2..-1].split(',')
   end
 end
-revised_array[1..-1].each do |cont|
-  p cont
+
+
+def rev_line(line, revised_array)
+  revised_array[1..-1].each do |cont|
+    base_name = File.basename(cont[0])
+    tmp = base_name+":"+cont[1]
+    line.gsub!(cont[0],tmp)
+  end
+  return line
 end
-# compare
-# write_non_open_pdfs
- 
+
+conts = ""
+File.readlines(list_csv.org).each do |line|
+  revised = rev_line(line, revised_array)
+  conts << revised
+end
+
+File.open('tmp.org','w'){|f| f.print conts}
