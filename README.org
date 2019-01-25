@@ -23,3 +23,11 @@
 
 ** 3
    -
+
+* リファクタリング
+
+** class NewCSVが要らない
+*** csvが不要
+   - readme_cl.csvをarray[]入れるのか，そもそもreadme_cl.csvは不要？
+     - conts[]をarray[]にする？
+       - でもそうすると，reviced_array[]はどうなる

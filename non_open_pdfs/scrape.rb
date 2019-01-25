@@ -14,7 +14,7 @@ class NewCSV
     target_csv = select_csv(@csv)
     write_csv(target_csv, conts)
   end
-
+#conts[]にpdfデータを入れる
   def mk_conts(org)
     conts = []
     File.open(org,"r") do |file|
@@ -46,6 +46,7 @@ end
 
 list_csv = NewCSV.new
 #p revised_array
+# readme_cl.csv -> array[]
 
 out, err, status= Open3.capture3("diff #{list_csv.tmp_csv} #{list_csv.csv}")
 if out == ''
@@ -59,6 +60,7 @@ out.split("\n").each do |line|
   if revised
     p line
     revised_array << line[2..-1].split(',')
+    p revised_array
   end
 end
 
