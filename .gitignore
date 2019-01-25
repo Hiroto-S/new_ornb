@@ -1,0 +1,32 @@
+
+# コメントは `#'
+
+# ディレクトリは最後にスラッシュ
+
+# * は展開される
+
+# /tmp のように '/' から始めれば
+# カレントディレクトリの tmp のみ無視
+# /hoge/tmp などは無視されない
+/tmp
+.DS_Store
+/.bundle/
+.yardoc/
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+*~
+\#*
+refs/
+names_orig.org
+Dockerfile
+gitignores/
+
+# $ git rm -r --cached .
+# $ git add .
+# $ git commit -m ".gitignore is now working"
+# $ git push origin master
