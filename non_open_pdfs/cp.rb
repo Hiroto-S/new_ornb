@@ -54,6 +54,7 @@ org = "README_test.org"
 cl_array = []
 tmp_array = []
 csv_data = CSV.read(csv,headers: false)
+p csv_data.class
   # readme_cl.csv -> array[]
 csv_data.each do |line|
   cl_array << line
