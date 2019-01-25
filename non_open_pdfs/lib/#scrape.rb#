@@ -1,20 +1,23 @@
+# -*- coding: utf-8 -*-
 require "open3"
 require "csv"
 require 'colorize'
 
 class NewCSV
-  attr_reader :org, :csv, :tmp_csv
-  def initialize(*argv)
-    @org = ARGV[0] || "README_test.org"
-    #new_org = "README_after_change.org"
-    @csv = "readme_cl.csv"
-    @tmp_csv = "tmp_readme_cl.csv"
+  attr_reader :org, :csv, :status
+  def initialize(org)
+    @org = org
+    @csv = File.basename(@org,'.org')+'_cl.csv'
 
     conts = mk_conts(@org)
-    target_csv = select_csv(@csv)
-    write_csv(target_csv, conts)
+    unless File.exist?(@csv)
+      write_csv(@csv, conts)
+    else
+      puts "file exist, you can force to make new csv, but ...".red
+      @status = false
+    end
   end
-#conts[]にpdfデータを入れる
+
   def mk_conts(org)
     conts = []
     File.open(org,"r") do |file|
@@ -27,24 +30,17 @@ class NewCSV
     conts
   end
 
-  def select_csv(csv)
-    unless File.exist?(csv)
-      return csv
-    else
-      return @tmp_csv
-    end
-  end
-
   def write_csv(csv, conts)
     CSV.open(csv,'w') do |csv|
-      conts.each do |cont|
-        csv << cont
-      end
+      conts.each{|cont| csv << cont}
     end
   end
 end
 
-list_csv = NewCSV.new
+file = ARGV[0] || 'README.org'
+list_csv = NewCSV.new(file)
+p list_csv.status
+list_csv.csv
 #p revised_array
 # readme_cl.csv -> array[]
 
