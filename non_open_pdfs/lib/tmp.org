@@ -82,8 +82,8 @@
     - irb, pry, ipython
   - off line manual, ri(eng), refe,  [[http://miyamae.github.io/rubydoc-ja/][rubydoc-ja(mac, 日本語)]]
 - pragmatic programmer(達人プログラマーより)
-  - [[./docs/pragmatic_programmer/c3_14_plain_text.pdf]]
-  - [[./docs/pragmatic_programmer/c3_15_shell.pdf]]
+  - [[c3_14_plain_text.pdf:journal]]
+  - [[c3_15_shell.pdf:web]]
   - [[./docs/pragmatic_programmer/c3_16_editor.pdf]]
   - [[./docs/pragmatic_programmer/c3_17_backup.pdf]]
 - 宿題

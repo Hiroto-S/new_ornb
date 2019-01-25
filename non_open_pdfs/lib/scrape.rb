@@ -3,31 +3,36 @@ require "open3"
 require "csv"
 require 'colorize'
 
-class NewCSV
-  attr_reader :org, :csv, :status
+class GetListFromOrg
+  attr_reader :conts
   def initialize(org)
-    @org = org
-    @csv = File.basename(@org,'.org')+'_cl.csv'
-
-    conts = mk_conts(@org)
-    unless File.exist?(@csv)
-      write_csv(@csv, conts)
-    else
-      puts "file exist, you can force to make new csv, but ...".red
-      @status = false
-    end
+    mk_conts(org)
   end
 
   def mk_conts(org)
-    conts = []
+    @conts = []
     File.open(org,"r") do |file|
       file.each do |line|
         if path = line.match(/\[\[(.+).pdf(.*)\]\]/)
-          conts << [path[1]+'.pdf',false]
+          @conts << [path[1]+'.pdf','false']
         end
       end
     end
-    conts
+    @conts
+  end
+end
+
+class GetList < GetListFromOrg
+  attr_reader :org, :csv, :status, :conts
+  def initialize(org)
+    @org = org
+    @csv = File.basename(@org,'.org')+'_cl.csv'
+    @status = true
+    unless File.exist?(@csv)
+      write_csv(@csv, mk_conts(@org))
+    else
+      @conts = CSV.read(@csv,headers: false)
+    end
   end
 
   def write_csv(csv, conts)
@@ -38,31 +43,14 @@ class NewCSV
 end
 
 file = ARGV[0] || 'README.org'
-list_csv = NewCSV.new(file)
-p list_csv.status
-exit
-#p revised_array
-# readme_cl.csv -> array[]
+list_csv = GetList.new(file)
+list_array = list_csv.conts
+tmp_array = GetListFromOrg.new(file).conts
 
-out, err, status= Open3.capture3("diff #{list_csv.tmp_csv} #{list_csv.csv}")
-if out == ''
-  puts "no revision on csv list".green
-  exit
-end
-revised_array = []
-revised = false
-out.split("\n").each do |line|
-  revised = true if line.chomp =='---'
-  if revised
-    p line
-    revised_array << line[2..-1].split(',')
-    p revised_array
-  end
-end
-
+p revised_array = list_array - tmp_array
 
 def rev_line(line, revised_array)
-  revised_array[1..-1].each do |cont|
+  revised_array.each do |cont|
     base_name = File.basename(cont[0])
     tmp = base_name+":"+cont[1]
     line.gsub!(cont[0],tmp)
