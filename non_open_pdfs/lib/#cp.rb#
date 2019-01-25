@@ -1,6 +1,7 @@
 require "open3"
 require "csv"
 require 'colorize'
+require "active_support/all"
 
 class NewCSV
   attr_reader :org, :csv, :tmp_csv
@@ -8,13 +9,14 @@ class NewCSV
     @org = ARGV[0] || "README_test.org"
     #new_org = "README_after_change.org"
     @csv = "readme_cl.csv"
-    @tmp_csv = "tmp_readme_cl.csv"
+#    @tmp_csv = "tmp_readme_cl.csv"
 
     conts = mk_conts(@org)
     target_csv = select_csv(@csv)
     write_csv(target_csv, conts)
+
   end
-#conts[]にpdfデータを入れる
+
   def mk_conts(org)
     conts = []
     File.open(org,"r") do |file|
@@ -29,9 +31,10 @@ class NewCSV
 
   def select_csv(csv)
     unless File.exist?(csv)
-      return csv
+      puts "file exist, you can force to make new csv, but ..."
+      exit
     else
-      return @tmp_csv
+      return csv
     end
   end
 
@@ -44,16 +47,44 @@ class NewCSV
   end
 end
 
-list_csv = NewCSV.new
-#p revised_array
+#list_csv = NewCSV.new
+csv = "readme_cl.csv"
+org = "README_test.org"
+cl_array = []
+tmp_array = []
+csv_data = CSV.read(csv,headers: false)
 # readme_cl.csv -> array[]
+csv_data.each do |line|
+  cl_array << line
+end
+# README.org - > tmp_array[]
+n = 0
+File.open(org,"r") do |file|
+  file.each do |line|
+    if path = line.match(/\[\[(.+).pdf(.*)\]\]/)
+      tmp_array << [path[1]+'.pdf',"false"]
+    end
+  end
+end
 
-out, err, status= Open3.capture3("diff #{list_csv.tmp_csv} #{list_csv.csv}")
+# diff cl_array[] tmp_array[] -> reviced_array[]
+#revised_array = []
+#diff = []
+#diff = (cl_array & tmp_array).present?
+#if diff == false
+#end
+p cl_array[0]
+p tmp_array[0]
+
+
+
+out, err, status= Open3.capture3("diff #{tmp_array[0]} #{cl_array[0]}")
 if out == ''
   puts "no revision on csv list".green
   exit
 end
-revised_array = []
+
+
 revised = false
 out.split("\n").each do |line|
   revised = true if line.chomp =='---'

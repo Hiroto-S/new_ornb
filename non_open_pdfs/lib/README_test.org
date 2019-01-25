@@ -76,7 +76,7 @@
   - on a net browser, "pull request"
 ** (10/10) emacs, ruby_fun(1,2,3)
 - ネタ
-  - [[c2_2_orthogonality.pdf:book][直交性]]を守れば．．．
+  - [[./docs/pragmatic_programmer/c2_2_orthogonality.pdf][直交性]]を守れば．．．
   - ruby
   - [[https://www.ruby-lang.org/ja/documentation/ruby-from-other-languages/][他言語からのRuby入門]]
     - irb, pry, ipython
