@@ -48,7 +48,7 @@ file = ARGV[0] || 'README.org'
 list_csv = GetList.new(file)
 list_array = list_csv.conts
 tmp_array = GetListFromOrg.new(file).conts
-revised_array = list_array - tmp_array
+diff_array = list_array - tmp_array
 
 list_name = []
 tmp_name = []
@@ -61,25 +61,26 @@ end
 
 m = tmp_name - list_name
 
-
-CSV.open("README_cl.csv",'a') do |csv|
+p csv_file = CSV.readlines("test.csv",headers: false)
+CSV.open(csv_file,'a') do |csv|
   m.each do |cont|
     csv << [cont,'false']
-    revised_array << [cont,'false']
+    diff_array << [cont,'false']
   end
 end
 
 revised_name = []
-CSV.foreach("README_cl.csv") do |file|
+CSV.foreach(csv_file) do |file|
   p file[0]
+
   revised_name << file[0]
 end
 
 dir = Dir.glob("**/*")
-CSV.foreach("README_cl.csv") do |file|
+CSV.foreach(csv_file) do |file|
   if link = file[0].match(/(\w*)\.pdf/m)
     unless dir.include?(link[0])
-      p "#{link[0]} does not exist"
+      puts "#{link[0]} does not exist".red
     end
   end
 end
@@ -90,8 +91,8 @@ end
 #  p 'true'
 #end
 
-def rev_line(line, revised_array)
-  revised_array.each do |cont|
+def rev_line(line, diff_array)
+  diff_array.each do |cont|
     base_name = File.basename(cont[0])
     tmp = base_name+":"+cont[1]
   end
@@ -100,7 +101,7 @@ end
 
 conts = ""
 File.readlines(list_csv.org).each do |line|
-  revised = rev_line(line, revised_array)
+  revised = rev_line(line, diff_array)
   conts << revised
 end
 
