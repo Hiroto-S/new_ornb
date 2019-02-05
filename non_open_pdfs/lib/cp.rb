@@ -1,113 +1,107 @@
+# -*- coding: utf-8 -*-
 require "open3"
 require "csv"
 require 'colorize'
-require "active_support/all"
+#require './tree.rb'
 
-class NewCSV
-  attr_reader :org, :csv, :tmp_csv
-  def initialize(*argv)
-    @org = ARGV[0] || "README_test.org"
-    #new_org = "README_after_change.org"
-    @csv = "readme_cl.csv"
-#    @tmp_csv = "tmp_readme_cl.csv"
 
-    conts = mk_conts(@org)
-    target_csv = select_csv(@csv)
-    write_csv(target_csv, conts)
-
+class GetListFromOrg
+  attr_reader :conts
+  def initialize(org)
+    mk_conts(org)
   end
 
   def mk_conts(org)
-    conts = []
+    @conts = []
     File.open(org,"r") do |file|
       file.each do |line|
         if path = line.match(/\[\[(.+).pdf(.*)\]\]/)
-          conts << [path[1]+'.pdf',false]
+          @conts << [path[1]+'.pdf','false']
         end
       end
     end
-    conts
+    @conts
   end
+end
 
-  def select_csv(csv)
-    unless File.exist?(csv)
-      puts "file exist, you can force to make new csv, but ..."
-      exit
+class GetList < GetListFromOrg
+  attr_reader :org, :csv, :status, :conts
+  def initialize(org)
+    @org = org
+    @csv = File.basename(@org,'.org')+'_cl.csv'
+    @status = true
+    unless File.exist?(@csv)
+      write_csv(@csv, mk_conts(@org))
     else
-      return csv
+      @conts = CSV.read(@csv,headers: false)
     end
   end
 
   def write_csv(csv, conts)
     CSV.open(csv,'w') do |csv|
-      conts.each do |cont|
-        csv << cont
-      end
+      conts.each{|cont| csv << cont}
     end
   end
 end
 
-#list_csv = NewCSV.new
-csv = "readme_cl.csv"
-org = "README_test.org"
-cl_array = []
-tmp_array = []
-csv_data = CSV.read(csv,headers: false)
-# readme_cl.csv -> array[]
-csv_data.each do |line|
-  cl_array << line
+file = ARGV[0] || 'README.org'
+list_csv = GetList.new(file)
+list_array = list_csv.conts
+tmp_array = GetListFromOrg.new(file).conts
+diff_array = list_array - tmp_array
+
+list_name = []
+tmp_name = []
+list_array.each do |cont|
+  list_name << cont[0]
 end
-# README.org - > tmp_array[]
-n = 0
-File.open(org,"r") do |file|
-  file.each do |line|
-    if path = line.match(/\[\[(.+).pdf(.*)\]\]/)
-      tmp_array << [path[1]+'.pdf',"false"]
+tmp_array.each do |cont|
+  tmp_name << cont[0]
+end
+
+m = tmp_name - list_name
+
+p csv_file = CSV.readlines("test.csv",headers: false)
+CSV.open(csv_file,'a') do |csv|
+  m.each do |cont|
+    csv << [cont,'false']
+    diff_array << [cont,'false']
+  end
+end
+
+revised_name = []
+CSV.foreach(csv_file) do |file|
+  p file[0]
+
+  revised_name << file[0]
+end
+
+dir = Dir.glob("**/*")
+CSV.foreach(csv_file) do |file|
+  if link = file[0].match(/(\w*)\.pdf/m)
+    unless dir.include?(link[0])
+      puts "#{link[0]} does not exist".red
     end
   end
 end
 
-# diff cl_array[] tmp_array[] -> reviced_array[]
-#revised_array = []
-#diff = []
-#diff = (cl_array & tmp_array).present?
-#if diff == false
+#p '----------'
+#p revised_name
+#if dir.include?(revised_name)
+#  p 'true'
 #end
-p cl_array[0]
-p tmp_array[0]
 
-
-
-out, err, status= Open3.capture3("diff #{tmp_array[0]} #{cl_array[0]}")
-if out == ''
-  puts "no revision on csv list".green
-  exit
-end
-
-
-revised = false
-out.split("\n").each do |line|
-  revised = true if line.chomp =='---'
-  if revised
-    p line
-    revised_array << line[2..-1].split(',')
-    p revised_array
-  end
-end
-
-
-def rev_line(line, revised_array)
-  revised_array[1..-1].each do |cont|
+def rev_line(line, diff_array)
+  diff_array.each do |cont|
     base_name = File.basename(cont[0])
     tmp = base_name+":"+cont[1]
-    line.gsub!(cont[0],tmp)
   end
   return line
 end
 
 conts = ""
 File.readlines(list_csv.org).each do |line|
-  revised = rev_line(line, revised_array)
+  revised = rev_line(line, diff_array)
   conts << revised
 end
 

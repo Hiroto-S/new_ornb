@@ -189,4 +189,5 @@
 - [[./docs/happy_ruby/RussOlsen_EloquentRuby_c5.pdf]]
 - [[./docs/happy_ruby/c3_4.ipynb]]
 - [[./docs/happy_ruby/RussOlsen_EloquentRuby_c1.pdf]]
-
+- [[./docs/happy_ruby/afe111111111111111111111.pdf]]
+- [[./docs/happy_ruby/sddddddfagertgsf.pdf]]

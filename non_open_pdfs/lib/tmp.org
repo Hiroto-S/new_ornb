@@ -76,14 +76,14 @@
   - on a net browser, "pull request"
 ** (10/10) emacs, ruby_fun(1,2,3)
 - ネタ
-  - [[c2_2_orthogonality.pdf:book][直交性]]を守れば．．．
+  - [[./docs/pragmatic_programmer/c2_2_orthogonality.pdf][直交性]]を守れば．．．
   - ruby
   - [[https://www.ruby-lang.org/ja/documentation/ruby-from-other-languages/][他言語からのRuby入門]]
     - irb, pry, ipython
   - off line manual, ri(eng), refe,  [[http://miyamae.github.io/rubydoc-ja/][rubydoc-ja(mac, 日本語)]]
 - pragmatic programmer(達人プログラマーより)
-  - [[c3_14_plain_text.pdf:journal]]
-  - [[c3_15_shell.pdf:web]]
+  - [[./docs/pragmatic_programmer/c3_14_plain_text.pdf]]
+  - [[./docs/pragmatic_programmer/c3_15_shell.pdf]]
   - [[./docs/pragmatic_programmer/c3_16_editor.pdf]]
   - [[./docs/pragmatic_programmer/c3_17_backup.pdf]]
 - 宿題
@@ -189,4 +189,5 @@
 - [[./docs/happy_ruby/RussOlsen_EloquentRuby_c5.pdf]]
 - [[./docs/happy_ruby/c3_4.ipynb]]
 - [[./docs/happy_ruby/RussOlsen_EloquentRuby_c1.pdf]]
-
+- [[./docs/happy_ruby/afe111111111111111111111.pdf]]
+- [[./docs/happy_ruby/sddddddfagertgsf.pdf]]

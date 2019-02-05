@@ -1,3 +1,8 @@
+Introduction
+Method
+Results
+Abstruct
+Discussing
 * 参照の付け替え
 ** 1
   - 各リンクの表示をどうするか
@@ -31,3 +36,16 @@
    - readme_cl.csvをarray[]入れるのか，そもそもreadme_cl.csvは不要？
      - conts[]をarray[]にする？
        - でもそうすると，reviced_array[]はどうなる
+* 1/30
+** Introduction
+   - tree.rb を元にREADME.orgだけ赤で表示
+   - revised_array + list_array でreadme_cl.csvを更新
+   - link切れチェック
+** Method
+*** tree.rb改
+    - require 'colorize'し, name = 'README.org'とした.
+    - p するところで正規表現を用い,nameとmatchする場合p #{entry}.redとした
+*** readme_cl.csvの更新
+    - diffを取れていなかった．
+    - revised_array = list_array - tmp_array としているため，listを変更した時にはdiffが取れるが，tmpに新しい一行が追加されたり，変更が加えられてもdiffが取れない．
+      

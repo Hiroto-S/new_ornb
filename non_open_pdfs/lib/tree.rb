@@ -5,26 +5,38 @@
 #       再帰的に木構造として表示する.
 # https://qiita.com/agatan/items/4c50554ae22aa4181cc1, 2019/1/25 accessed.
 require 'optparse'
-
+require 'colorize'
 options = ARGV.getopts('aF')
 
 # parentは絶対パス.
 def display_entries(parent, prefix, options)
   # '.', '..'を除く. 無限に再帰することを防ぐ
+  name = 'README.org'
   entries = Dir.entries(parent).delete_if do |entry|
     entry == '.' or entry == '..' or !options['a'] && entry.start_with?('.')
   end
 
   entries.each_with_index do |entry, index|
     fullpath = File.join(parent, entry)
+
     entry = f_option(parent, entry) if options['F']
-    # 最後の要素かどうか
+
     if index == entries.size - 1
-      puts "#{prefix}└── #{entry}"
-      next_prefix = prefix + '    '
+      if entry.match(/#{name}/)
+        puts "#{prefix}└── #{entry}".red
+        next_prefix = prefix + '    '
+      else
+        puts "#{prefix}└── #{entry}"
+        next_prefix = prefix + '    '
+      end
     else
-      puts "#{prefix}├── #{entry}"
-      next_prefix = prefix + '│   '
+      if entry.match(/#{name}/)
+        puts "#{prefix}├── #{entry}".red
+        next_prefix = prefix + '│   '
+      else
+        puts "#{prefix}└── #{entry}"
+        next_prefix = prefix + '    '
+      end
     end
     if File.directory? fullpath
       display_entries(fullpath, next_prefix, options)
