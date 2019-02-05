@@ -159,7 +159,6 @@
 * (11/28, 12/12,19) pattern, template, observer, DSL, CoC...
 *** Design patternについて
 - [[./docs/design_pattern/Matsu/DesignPatternMatsu-Cover-4.pdf]]
-- [[./docs/design_pattern/Matsu/DesignPatternMatsu-Cover-5.pdf]]
 - [[./docs/design_pattern/DesignPatternGangOfFour.pdf]]
 *** Russ Olsen流Ruby言語入門
 - [[./docs/design_pattern/RussOlsen_c2_1_Ruby.pdf]]
@@ -190,4 +189,5 @@
 - [[./docs/happy_ruby/RussOlsen_EloquentRuby_c5.pdf]]
 - [[./docs/happy_ruby/c3_4.ipynb]]
 - [[./docs/happy_ruby/RussOlsen_EloquentRuby_c1.pdf]]
-
+- [[./docs/happy_ruby/afe111111111111111111111.pdf]]
+- [[./docs/happy_ruby/sddddddfagertgsf.pdf]]
