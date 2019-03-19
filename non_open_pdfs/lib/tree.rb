@@ -3,7 +3,7 @@
 #
 # tree: 引数で指定されたディレクトリ以下のファイルを
 #       再帰的に木構造として表示する.
-
+# https://qiita.com/agatan/items/4c50554ae22aa4181cc1, 2019/1/25 accessed.
 require 'optparse'
 require 'colorize'
 options = ARGV.getopts('aF')

@@ -61,8 +61,8 @@ end
 
 m = tmp_name - list_name
 
-p csv_file = CSV.readlines("test.csv",headers: false)
-CSV.open(csv_file,'a') do |csv|
+t_f = 'test.csv'
+CSV.open(t_f,'a') do |csv|
   m.each do |cont|
     csv << [cont,'false']
     diff_array << [cont,'false']
@@ -70,20 +70,25 @@ CSV.open(csv_file,'a') do |csv|
 end
 
 revised_name = []
-CSV.foreach(csv_file) do |file|
-  p file[0]
-
-  revised_name << file[0]
+CSV.foreach(t_f) do |eles|
+  p eles[0]
+  revised_name << eles[0]
 end
 
-dir = Dir.glob("**/*")
-CSV.foreach(csv_file) do |file|
-  if link = file[0].match(/(\w*)\.pdf/m)
-    unless dir.include?(link[0])
-      puts "#{link[0]} does not exist".red
+p dir = Dir.glob("**/*")
+# t_fにあるpdfのlinkが，dirに含まれているかをcheck
+# fileにbasenameで取り出す
+# 含まれてなかったらlink切れをあかで表示．
+CSV.foreach(t_f) do |eles|
+  p file = File.basename(eles[0])
+  if link = file.match(/(\w*)\.pdf/m)
+    unless dir.include?(file)
+      puts "#{file} does not exist".red
     end
   end
 end
+
+exit
 
 #p '----------'
 #p revised_name

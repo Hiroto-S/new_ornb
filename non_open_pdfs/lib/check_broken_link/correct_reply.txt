@@ -1,0 +1,7 @@
+"/Users/hiroto/Documents/lab/grad_research_18f/members/hiroto/new_ornb/non_open_pdfs/lib/RussOlsen_EloquentRuby_c1.pdff"
+"/RussOlsen_EloquentRuby_c1.pdf"
+["test.csv", "correct_reply.txt", "README_cl.csv", "cp.rb", "README.org"]
+"RussOlsen_EloquentRuby_c1.pdff"
+[0;31;49mRussOlsen_EloquentRuby_c1.pdff does not exist[0m
+"RussOlsen_EloquentRuby_c1.pdf"
+[0;31;49mRussOlsen_EloquentRuby_c1.pdf does not exist[0m
